@@ -5,6 +5,24 @@ cd /path/to/your/project
 git init
 
 # 3. Add the remote repository (replace USERNAME, TOKEN, and REPO accordingly)
+git remote add origin https://MaheshNadendla:TOKEN@github.com/MaheshNadendla/REPO.git
+
+# 4. Set Git to store credentials indefinitely
+git config --global credential.helper store
+
+# 5. Push code to GitHub (this will prompt for your username and PAT, which will be stored)
+git push -u origin master
+
+
+
+
+# 1. Navigate to your project directory
+cd /path/to/your/project
+
+# 2. Initialize Git if you haven't already
+git init
+
+# 3. Add the remote repository (replace USERNAME, TOKEN, and REPO accordingly)
 git remote add origin https://USERNAME:TOKEN@github.com/USERNAME/REPO.git
 
 # 4. Set Git to store credentials indefinitely
