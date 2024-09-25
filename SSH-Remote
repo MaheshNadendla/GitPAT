@@ -1,5 +1,30 @@
 
 # 1. Generate SSH Key
+ssh-keygen -t ed25519 -C "maheshnadendla147@gmail.com"
+
+# 2. Start SSH Agent
+eval "$(ssh-agent -s)"
+
+# 3. Add SSH Private Key to SSH Agent
+ssh-add ~/.ssh/id_ed25519
+
+# 4. Copy SSH Public Key to Clipboard
+cat ~/.ssh/id_ed25519.pub
+
+# 5. Test SSH connection to GitHub
+ssh -T git@github.com
+
+# 6. Set Remote to Use SSH
+cd /path/to/your/project
+git remote add origin git@github.com:MaheshNadendla/REPO.git
+
+# 7. Push Code to GitHub Using SSH
+git push -u origin master
+
+
+
+
+# 1. Generate SSH Key
 ssh-keygen -t ed25519 -C "your_email@example.com"
 
 # 2. Start SSH Agent
