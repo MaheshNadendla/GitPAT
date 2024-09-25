@@ -1,0 +1,83 @@
+
+# 1. Generate GPG Key
+gpg --full-generate-key
+
+# 2. List GPG Keys and find the Key ID
+gpg --list-secret-keys --keyid-format LONG
+
+# 3. Copy GPG Public Key to GitHub (Replace ABCDEF1234567890 with your actual Key ID)
+gpg --armor --export ABCDEF1234567890
+
+# 4. Configure Git to use your GPG Key (Replace ABCDEF1234567890 with your actual Key ID)
+git config --global user.signingkey ABCDEF1234567890
+
+# 5. Enable GPG commit signing globally
+git config --global commit.gpgSign true
+
+# 6. Test Signing a Commit
+git commit -S -m "Your signed commit message"
+
+
+
+
+1. Generate GPG Key
+First, generate a GPG key pair. You'll use the key to sign your Git commits:
+
+bash
+Copy code
+gpg --full-generate-key
+Select the RSA and RSA option (type 1).
+Choose the key size as 4096 bits.
+Set the key to never expire (or choose a time period).
+Enter your name and email address (this should match your GitHub account email).
+2. List GPG Keys and Copy Your GPG Key ID
+List the GPG keys to find your newly generated key’s ID:
+
+bash
+Copy code
+gpg --list-secret-keys --keyid-format LONG
+You'll see an output like:
+
+yaml
+Copy code
+/home/your_user/.gnupg/secring.gpg
+-----------------------------------
+sec   4096R/ABCDEF1234567890 2023-09-23 [expires: 2024-09-23]
+uid                          Your Name <your_email@example.com>
+ssb   4096R/0987654321ABCDEF 2023-09-23
+The key ID is the part after the sec line: ABCDEF1234567890.
+
+3. Copy the GPG Public Key to GitHub
+Use the following command to export your GPG public key:
+
+bash
+Copy code
+gpg --armor --export ABCDEF1234567890
+Copy the entire output, including the -----BEGIN PGP PUBLIC KEY BLOCK----- and -----END PGP PUBLIC KEY BLOCK-----.
+
+Next, add the public GPG key to GitHub:
+
+Go to GitHub > Settings > SSH and GPG keys.
+Click New GPG key.
+Paste the public key into the provided field and click Add GPG key.
+4. Tell Git to Use Your GPG Key
+Configure Git to use your GPG key for signing commits:
+
+bash
+Copy code
+git config --global user.signingkey ABCDEF1234567890
+You can also enable commit signing globally:
+
+bash
+Copy code
+git config --global commit.gpgSign true
+5. Test Signing a Commit
+Now, create a new commit to ensure it's signed with your GPG key:
+
+bash
+Copy code
+git commit -S -m "Your signed commit message"
+Git will prompt you to unlock your GPG key with your passphrase.
+
+6. Verify Signed Commits on GitHub
+Once you've pushed the commit to GitHub, your commit will be marked as "Verified" if everything is set up correctly.
